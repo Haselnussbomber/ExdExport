@@ -4,7 +4,7 @@ using Lumina;
 using Lumina.Data;
 using Lumina.Data.Structs.Excel;
 using Lumina.Excel;
-using Lumina.Excel.Sheets;
+using Lumina.Excel.Sheets.Experimental;
 using Lumina.Text.ReadOnly;
 using System;
 using System.Collections;
@@ -15,6 +15,8 @@ using System.Reflection;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Unicode;
+
+#pragma warning disable PendingExcelSchema
 
 var options = Parser.Default.ParseArguments<Options>(args).Value;
 
@@ -38,7 +40,7 @@ var gameData = new GameData(options.Path, new()
 
 var sheetTypes = new List<Type>(
     Assembly.GetAssembly(typeof(Achievement))!.GetTypes()
-        .Where(type => !type.IsNested));
+        .Where(type => type.Namespace == "Lumina.Excel.Sheets.Experimental" && !type.IsNested));
 
 var typeNameCache = new Dictionary<Type, string>();
 
