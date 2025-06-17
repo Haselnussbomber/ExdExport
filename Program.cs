@@ -239,7 +239,7 @@ void ProcessGeneratedSubrowSheet(object sheet, string sheetName, Type rowType, F
 
             foreach (var prop in props)
             {
-                if (prop.Name == "RowId")
+                if (prop.Name is "RowId" or "SubrowId")
                     continue;
 
                 writer.WritePropertyName(prop.Name);
