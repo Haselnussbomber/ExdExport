@@ -1,0 +1,30 @@
+name: Build
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-slim
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          submodules: true
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: "10.0"
+
+      - name: Restore dependencies
+        run: dotnet restore --locked-mode
+
+      - name: Build
+        run: dotnet build --no-restore -c Release -clp:NoSummary
+
+      - name: Upload Build Artifact
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-artifact@v5
+        with:
+          path: bin/*
