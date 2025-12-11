@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="ExdExport/ExdExport.csproj" />
+  <Project Path="Lumina.Excel/src/Lumina.Excel/Lumina.Excel.csproj" />
+  <Project Path="Lumina.Excel/src/Lumina.Excel.Generator/Lumina.Excel.Generator.csproj" />
+</Solution>
