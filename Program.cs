@@ -490,7 +490,7 @@ void WriteValue(Utf8JsonWriter writer, Type type, object? value, bool rawSeStrin
     }
     else if (value is ReadOnlySeString seString)
     {
-        writer.WriteStringValue(seString.ToString());
+        writer.WriteStringValue(seString.ToMacroString());
     }
     else if (type.IsPrimitive)
     {
