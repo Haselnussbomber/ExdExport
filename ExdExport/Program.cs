@@ -173,7 +173,7 @@ void ProcessGeneratedSheet(object sheet, string sheetName, Type rowType, FileStr
 
         foreach (var prop in props)
         {
-            if (prop.Name == "RowId")
+            if (prop.Name is "RowId" or "RowOffset" or "ExcelPage")
                 continue;
 
             writer.WritePropertyName(prop.Name);
@@ -239,7 +239,7 @@ void ProcessGeneratedSubrowSheet(object sheet, string sheetName, Type rowType, F
 
             foreach (var prop in props)
             {
-                if (prop.Name is "RowId" or "SubrowId")
+                if (prop.Name is "RowId" or "SubrowId" or "RowOffset" or "ExcelPage")
                     continue;
 
                 writer.WritePropertyName(prop.Name);
