@@ -1,12 +1,4 @@
-﻿using CommandLine;
-using ExdExport;
-using Lumina;
-using Lumina.Data;
-using Lumina.Data.Structs.Excel;
-using Lumina.Excel;
-using Lumina.Excel.Sheets.Experimental;
-using Lumina.Text.ReadOnly;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -15,6 +7,15 @@ using System.Reflection;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Unicode;
+using CommandLine;
+using ExdExport;
+using Lumina;
+using Lumina.Data;
+using Lumina.Data.Files.Excel;
+using Lumina.Data.Structs.Excel;
+using Lumina.Excel;
+using Lumina.Excel.Sheets.Experimental;
+using Lumina.Text.ReadOnly;
 
 #pragma warning disable PendingExcelSchema
 
@@ -37,6 +38,9 @@ var gameData = new GameData(options.Path, new()
     PanicOnSheetChecksumMismatch = false,
     CacheFileResources = false,
 });
+
+var excelListFile = gameData.GetFile<ExcelListFile>("exd/root.exl")
+    ?? throw new FileNotFoundException("Unable to load exd/root.exl!");
 
 var sheetTypes = new List<Type>(
     Assembly.GetAssembly(typeof(Achievement))!.GetTypes()
@@ -148,6 +152,8 @@ void ProcessGeneratedSheet(object sheet, string sheetName, Type rowType, FileStr
     writer.WriteStartObject();
     writer.WritePropertyName("meta");
     writer.WriteStartObject();
+    if (excelListFile.ExdMap.TryGetValue(sheetName, out var sheetIndex))
+        writer.WriteNumber("sheetIndex", sheetIndex);
     writer.WriteString("sheetName", sheetName);
     writer.WriteNumber("numColumns", columns.Count);
     writer.WriteNumber("numRows", rowCount);
@@ -609,6 +615,6 @@ public class Options
     [Option("outdir", HelpText = "The path to the output directory.", Default = "export")]
     public string? ExportPath { get; set; }
 
-    [Option('l', "languages", HelpText = "The languages to export.", Default = new string[] { "de", "en", "fr", "ja" }, Separator = ',')]
+    [Option('l', "languages", HelpText = "The languages to export.", Default = new string[] { "ja", "en", "de", "fr", "chs", "cht", "ko", "tc" }, Separator = ',')]
     public string[]? Languages { get; set; }
 }

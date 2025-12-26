@@ -10,9 +10,9 @@
       },
       "Lumina": {
         "type": "Direct",
-        "requested": "[7.0.0, )",
-        "resolved": "7.0.0",
-        "contentHash": "xK7vWvLJOS5Gc+KW/BxmDuFfquvtgB+dihO87plrxPAbbFfBORu4ZpU2JtM3VBCtA/WcgCWwiwB7cJoYMm2l+A==",
+        "requested": "[7.1.0, )",
+        "resolved": "7.1.0",
+        "contentHash": "7zjreOpMXOhf+m5uTefoLZO6Mt3y68XhK036eDOS5JJ8yuIjAgFteWkzdCRcss8+PH5skMnDMDUZoTJJefQCtg==",
         "dependencies": {
           "BCnEncoder.Net": "2.2.1",
           "Microsoft.Extensions.ObjectPool": "10.0.0"
@@ -59,7 +59,7 @@
       "lumina.excel": {
         "type": "Project",
         "dependencies": {
-          "Lumina": "[7.0.0, )"
+          "Lumina": "[7.1.0, )"
         }
       }
     },
