@@ -615,6 +615,6 @@ public class Options
     [Option("outdir", HelpText = "The path to the output directory.", Default = "export")]
     public string? ExportPath { get; set; }
 
-    [Option('l', "languages", HelpText = "The languages to export.", Default = new string[] { "ja", "en", "de", "fr", "chs", "cht", "ko", "tc" }, Separator = ',')]
+    [Option('l', "languages", HelpText = "The languages to export.", Default = new string[] { "de", "en", "fr", "ja" }, Separator = ',')]
     public string[]? Languages { get; set; }
 }
